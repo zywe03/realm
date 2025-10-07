@@ -12,10 +12,10 @@ license = "MIT"
 
 [dependencies]
 # realm
-realm_io = { version = "0.5" }
-realm_syscall = "0.1"
-realm_hook = { version = "0.1", optional = true }
-realm_lb = { version = "0.1", optional = true }
+realm_io      = { version = "0.5", path = "../realm_io" }
+realm_syscall = { version = "0.1", path = "../realm_syscall" }
+realm_hook    = { version = "0.1", path = "../realm_hook", optional = true }
+realm_lb      = { version = "0.1", path = "../realm_lb", optional = true }
 kaminari = { version = "0.14", features = ["ws", "tls", "mix"], optional = true }
 
 # other
