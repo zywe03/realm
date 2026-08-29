@@ -4,6 +4,26 @@ pre-build = [
   "apt install -y clang libclang-dev nasm"
 ]
 
+[target.x86_64-unknown-linux-gnu]
+image = "ubuntu:20.04"
+pre-build = [
+  "apt update",
+  "DEBIAN_FRONTEND=noninteractive apt install -y build-essential clang libclang-dev cmake nasm"
+]
+
+[target.aarch64-unknown-linux-gnu]
+image = "ubuntu:20.04"
+pre-build = [
+  "apt update",
+  "DEBIAN_FRONTEND=noninteractive apt install -y build-essential gcc-aarch64-linux-gnu g++-aarch64-linux-gnu clang libclang-dev cmake nasm"
+]
+
+[target.aarch64-unknown-linux-gnu.env]
+passthrough = [
+  "BINDGEN_EXTRA_CLANG_ARGS",
+  "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER",
+]
+
 [target.mips-unknown-linux-gnu]
 image = "ghcr.io/cross-rs/mips-unknown-linux-gnu:main"
 build-std = ["core", "std", "alloc", "proc_macro", "panic_abort"]

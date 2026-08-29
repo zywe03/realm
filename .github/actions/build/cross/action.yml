@@ -20,6 +20,12 @@ runs:
       with:
         target: ${{ inputs.target }}
         cross: ${{ inputs.mode != 'native' && 'true' || 'false' }}
+    - name: set cross-compilation env for aarch64
+      if: inputs.target == 'aarch64-unknown-linux-gnu'
+      run: |
+        echo "BINDGEN_EXTRA_CLANG_ARGS=--sysroot=/usr/aarch64-linux-gnu" >> "$GITHUB_ENV"
+        echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc" >> "$GITHUB_ENV"
+      shell: bash
     - name: build and copy binary
       run: |
         cross build --release --target=${{ inputs.target }}
